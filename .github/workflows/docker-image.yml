@@ -1,0 +1,30 @@
+name: Publish docker images
+
+on:
+  #daily at 3 UTC
+  schedule:
+    - cron: "0 3 * * *"
+  #this is triggered also on PR merge
+  push:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push Docker image for php ${{ matrix.version }}
+        uses: docker/build-push-action@v2
+        with:
+          tags: vema/docker-web-ext:latest
+          pull: true
+          push: true
