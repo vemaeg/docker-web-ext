@@ -6,7 +6,7 @@ on:
     - cron: "0 3 * * *"
   #this is triggered also on PR merge
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
 
