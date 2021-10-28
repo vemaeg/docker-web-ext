@@ -1,3 +1,3 @@
-FROM node:16-alpine
+FROM node:17-alpine
 
 RUN npm i -g web-ext
